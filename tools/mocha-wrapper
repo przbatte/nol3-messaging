@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const {execFileSync} = require('child_process')
+const {readFileSync} = require('fs')
+
+let cmd, args = ['--exit']
+const pathConfig = './mocha.opts';
+const isCoverage = process.env.NODE_ENV == 'coverage'
+
+if (isCoverage) {
+  cmd = 'nyc'
+  args = ['mocha'].concat(args)
+} else {
+  cmd = 'mocha'
+}
+args.push(...process.argv.slice(2))
+
+try {
+  const opts = readFileSync(pathConfig, 'utf8')
+    .trim()
+    .split(/\s+/)
+
+  execFileSync(cmd, [...args, ...opts], {
+    env: process.env,
+    stdio: 'inherit',
+  })
+} catch (e) {
+  process.exit(1)
+}

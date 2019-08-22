@@ -1,0 +1,56 @@
+{
+  "name": "no3-messaging",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "cross-env BABEL_ENV=production babel src --out-dir lib",
+    "test": "./tools/mocha-wrapper test/**/*.test.js",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "author": "Przemyslaw Batte",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "babel-plugin-istanbul": "^5.2.0",
+    "chai": "^4.2.0",
+    "common-tags": "^1.8.0",
+    "cross-env": "^5.2.0",
+    "lodash": "^4.17.15",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "rimraf": "^3.0.0",
+    "xml2js": "^0.4.19"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "branches": 20,
+    "functions": 90,
+    "lines": 90,
+    "statements": 90,
+    "reporter": [
+      "text",
+      "lcov"
+    ],
+    "instrument": false,
+    "sourceMap": false,
+    "require": [
+      "@babel/register"
+    ],
+    "include": [
+      "src"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const {execFileSync} = require('child_process')
+
+process.env.NODE_ENV = 'coverage'
+
+const args = process.argv.slice(2)
+const task = args.length ? args[0] : 'test'
+
+try {
+  execFileSync('npm', ['run', task], {
+    env: process.env,
+    stdio: 'inherit',
+  })
+} catch (e) {
+  process.exit(1)
+}
