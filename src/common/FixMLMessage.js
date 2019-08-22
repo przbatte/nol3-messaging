@@ -1,12 +1,12 @@
 const xml2js = require('xml2js')
 
 const rootAttributesSymbol = Symbol('rootAttributes')
-const childNameSymbol = Symbol('childName')
+const descendantNameSymbol = Symbol('descendantName')
 
 class FixMLMessage {
-  constructor (childName) {
-    if (!childName) {
-      throw `child name parameter not provided`
+  constructor (descendantName) {
+    if (!descendantName) {
+      throw `descendant name parameter not provided`
     }
 
     this[rootAttributesSymbol] = {
@@ -14,18 +14,18 @@ class FixMLMessage {
       r: '20080317',
       s: '20080314',
     }
-    this[childNameSymbol] = childName
+    this[descendantNameSymbol] = descendantName
   }
 
-  get childName () {
-    return this[childNameSymbol]
+  get descendantName () {
+    return this[descendantNameSymbol]
   }
 
-  build (childNode) {
+  build (descendantNode) {
     const xmlObject = Object.assign({
       $: this[rootAttributesSymbol],
     }, {
-      [this.childName]: childNode,
+      [this.descendantName]: descendantNode,
     })
 
     const builder = new xml2js.Builder({

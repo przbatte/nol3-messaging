@@ -9,6 +9,8 @@ const passwordSymbol = Symbol('password')
 const newPasswordSymbol = Symbol('newPassword')
 const xmlSymbol = Symbol('xml')
 
+const ROOT_DESCENDANT_NAME = 'UserReq'
+
 class UserRequest extends FixMLMessage {
   constructor ({
     userRequestId,
@@ -17,7 +19,7 @@ class UserRequest extends FixMLMessage {
     password = 'BOS',
     newPassword,
   } = {}) {
-    super('UserReq')
+    super(ROOT_DESCENDANT_NAME)
 
     this[userRequestIdSymbol] = userRequestId
     this[userRequestTypeSymbol] = userRequestType instanceof UserRequestType ? userRequestType.value : userRequestType
@@ -84,7 +86,7 @@ class UserRequest extends FixMLMessage {
   }
 
   static read (xmlObject) {
-    const {UserReqID, UserReqTyp, Username, Password, NewPassword} = xmlObject[0]['$']
+    const {UserReqID, UserReqTyp, Username, Password, NewPassword} = xmlObject[ROOT_DESCENDANT_NAME][0]['$']
 
     return new UserRequest({
       userRequestId: UserReqID && parseInt(UserReqID),

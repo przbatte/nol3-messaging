@@ -29,7 +29,7 @@ describe('UserRequest', () => {
     `
 
     const parsedXmlString = await parseXmlString(xmlString)
-    const message = await UserRequest.read(parsedXmlString['$$'])
+    const message = await UserRequest.read(parsedXmlString)
 
     expect(message).to.be.an.instanceof(UserRequest)
     expect(message.toJSON()).to.eql({
