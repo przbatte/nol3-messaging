@@ -7,7 +7,8 @@
     "clean": "rimraf lib",
     "build": "cross-env BABEL_ENV=production babel src --out-dir lib",
     "test": "./tools/mocha-wrapper test/**/*.test.js",
-    "prepublish": "npm run build"
+    "cover": "./tools/coverage",
+    "prepublish": "npm run cover && npm run build"
   },
   "keywords": [],
   "author": "Przemyslaw Batte",

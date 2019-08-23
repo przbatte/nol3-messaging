@@ -75,7 +75,7 @@ class UserRequest extends FixMLMessage {
     let childNode = {
       $: _.omitBy({
         UserReqID: this.userRequestId,
-        UserReqTyp: this.userRequestType ? this.userRequestType.value : undefined,
+        UserReqTyp: this.userRequestType && this.userRequestType.value,
         Username: this.username,
         Password: this.password,
         NewPassword: this.newPassword,
